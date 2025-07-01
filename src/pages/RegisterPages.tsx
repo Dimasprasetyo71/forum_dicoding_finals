@@ -118,25 +118,7 @@ export default function RegisterPage() {
     setPasswordHint(feedback);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut'
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -30,
-      transition: {
-        duration: 0.4,
-        ease: 'easeIn'
-      }
-    }
-  };
+
 
   const getStrengthColor = () => {
     if (strength < 30) return 'bg-red-500';
@@ -179,7 +161,6 @@ export default function RegisterPage() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          variants={containerVariants}
         >
           {/* Glass card with enhanced design */}
           <div className="w-full bg-white/85 backdrop-blur-xl shadow-2xl rounded-2xl overflow-hidden border border-white/30">

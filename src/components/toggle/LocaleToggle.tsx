@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import FlagIcon from './FlagIcon';
+import { FlagIcon } from './FlagIcon';
 import LocaleContext from '../../contexts/LocaleContext';
 
 const LocaleToggle = () => {
