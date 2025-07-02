@@ -1,41 +1,30 @@
-name: Deploy to Vercel
-
+ame: Deploy to Vercel
 on:
   push:
-    branches:
-      - master
+    branches: master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # 📦 Checkout repo
       - uses: actions/checkout@v3
 
-      # 🛠️ Setup Node.js 20
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '18'
+          cache: 'npm'
 
-      # ⚡ Cache Node.js modules
-      - name: Cache Node.js modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
 
-      # 🏗️ Install Vercel CLI
-      - run: npm install --global vercel
+      - name: Build
+        run: npm run build
 
-      # 🧩 Install project dependencies with legacy peer deps
-      - run: npm install --legacy-peer-deps
+      - name: Install Vercel CLI
+        run: npm install -g vercel
 
-      # 🛒 Pull Vercel project settings
-      - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
+      - name: Deploy to Vercel
       # ⚙️ Build
       - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
