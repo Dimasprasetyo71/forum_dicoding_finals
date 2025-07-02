@@ -20,14 +20,6 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      # 📥 Install dependencies
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      # 🛠️ Build your app
-      - name: Build
-        run: npm run build
-
       # 📦 Install Vercel CLI
       - name: Install Vercel CLI
         run: npm install -g vercel
@@ -36,6 +28,8 @@ jobs:
       - name: Pull Vercel Environment Info
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      # 🚀 Deploy prebuilt output (skip vercel build step)
+      # 🚀 Build and Deploy (let Vercel handle everything)
       - name: Deploy to Vercel
-        run: vercel deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_NPM_INSTALL_FLAGS: "--legacy-peer-deps"
