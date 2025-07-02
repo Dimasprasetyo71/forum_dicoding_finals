@@ -6,7 +6,7 @@ import { ThemeProvider } from './contexts/ThemeContext.tsx';
 import { LocaleProvider } from './contexts/LocaleContext.tsx';
 import store from './store/index.ts';
 
-
+import './index.css'
 import { Provider } from 'react-redux';
 import Metadata from './components/metadata.tsx';
 // import VoteButton from './components/button/VoteButton.tsx';
