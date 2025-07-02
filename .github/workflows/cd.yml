@@ -10,15 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 📦 Checkout repo
       - uses: actions/checkout@v3
 
-      # 🛠️ Setup Node.js 20
       - uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      # ⚡ Cache Node.js modules
       - name: Cache Node.js modules
         uses: actions/cache@v3
         with:
@@ -27,17 +24,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # 🏗️ Install Vercel CLI
       - run: npm install --global vercel
 
-      # 🧩 Install project dependencies with legacy peer deps
-      - run: npm install --legacy-peer-deps
+      # Install project deps yourself (with legacy-peer-deps)
+      - run: npm ci --legacy-peer-deps
 
-      # 🛒 Pull Vercel project settings
       - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      # ⚙️ Build
-      - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      # Disable Vercel auto-install to prevent conflict
+      - run: VERCEL_NPM_INSTALL_FLAGS="" vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      # 🚀 Deploy
       - run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
