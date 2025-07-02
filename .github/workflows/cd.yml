@@ -37,9 +37,10 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       # ⚙️ Build using Vercel CLI
-      - name: Vercel Build
-        run: VERCEL_NPM_INSTALL_FLAGS="" vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
+      - name: Build with Vercel
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_NPM_INSTALL_FLAGS: "--legacy-peer-deps"
       # 🚀 Deploy prebuilt output
       - name: Vercel Deploy
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
