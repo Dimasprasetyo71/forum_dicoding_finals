@@ -22,19 +22,32 @@ function unsetAuthUserActionCreator() {
   };
 }
 
-function asyncSetAuthUser({ email, password } : { email: string, password: string }) {
-  return async (dispatch : any) => {
+function asyncSetAuthUser({ email, password }: { email: string; password: string }) {
+  return async (dispatch: any) => {
     dispatch(showLoading());
     try {
-      const token = await api.login({ email, password , name: '' });
+      // 1) Login
+      const token = await api.login({ email, password, name: '' });
+
+      // 2) Simpan token
       api.putAccessToken(token);
+
+      // 3) Ambil profil user
       const authUser = await api.getOwnProfile();
+
+      // 4) Set user di state
       dispatch(setAuthUserActionCreator(authUser));
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Error logging in:', error);
+
+      // Optional: lempar supaya bisa catch di komponen
+      throw error;
+    } finally {
+      dispatch(hideLoading());
     }
-    dispatch(hideLoading());
   };
 }
+
 
 function asyncUnsetAuthUser() {
   return async (dispatch : any) => {

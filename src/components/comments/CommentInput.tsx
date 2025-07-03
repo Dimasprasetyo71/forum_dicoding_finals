@@ -122,14 +122,14 @@ export default function CommentInput({ addComment }: CommentInputProps) {
                 strokeWidth="2"
                 strokeDasharray={`${progress}, 100`}
                 className={`transition-all duration-300 ${isOverLimit ? 'text-red-500' : isNearLimit ? 'text-yellow-500' : 'text-blue-500'
-                  }`}
+                }`}
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className={`text-xs font-medium ${isOverLimit ? 'text-red-600 dark:text-red-400' :
-                  isNearLimit ? 'text-yellow-600 dark:text-yellow-400' :
-                    'text-gray-600 dark:text-gray-400'
-                }`}>
+                isNearLimit ? 'text-yellow-600 dark:text-yellow-400' :
+                  'text-gray-600 dark:text-gray-400'
+              }`}>
                 {characterCount > 99 ? '99+' : characterCount}
               </span>
             </div>
@@ -139,9 +139,9 @@ export default function CommentInput({ addComment }: CommentInputProps) {
 
       {/* Input Container */}
       <div className={`relative bg-white dark:bg-gray-800 rounded-2xl border-2 transition-all duration-300 ${isFocused
-          ? 'border-blue-500 shadow-lg shadow-blue-500/20 ring-4 ring-blue-500/10'
-          : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-        }`}>
+        ? 'border-blue-500 shadow-lg shadow-blue-500/20 ring-4 ring-blue-500/10'
+        : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+      }`}>
         {/* Textarea */}
         <textarea
           ref={textareaRef}
@@ -154,7 +154,7 @@ export default function CommentInput({ addComment }: CommentInputProps) {
           disabled={isLoading}
           maxLength={maxCharacters}
           className={`w-full rounded-t-2xl p-4 text-sm text-gray-900 dark:text-gray-100 bg-transparent resize-none focus:outline-none transition-all duration-200 min-h-[80px] max-h-[200px] ${isLoading ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+          }`}
           placeholder="Tulis komentar yang membangun dan relevan..."
           aria-label="Tulis komentar Anda"
           style={{ scrollbarWidth: 'thin' }}
@@ -227,9 +227,9 @@ export default function CommentInput({ addComment }: CommentInputProps) {
               onClick={onCommentSubmit}
               disabled={comment.trim() === '' || isLoading || isOverLimit}
               className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 ${comment.trim() === '' || isLoading || isOverLimit
-                  ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95'
-                }`}
+                ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95'
+              }`}
             >
               {isLoading ? (
                 <>

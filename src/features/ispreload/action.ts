@@ -24,7 +24,7 @@ export function asyncPreloadProcess() {
     try {
       const authUser = await api.getOwnProfile();
       dispatch(setAuthUserActionCreator(authUser));
-    } catch (error) {
+    } catch {
       dispatch(setAuthUserActionCreator(null));
     } finally {
       dispatch(setIsPreloadActionCreator(false));

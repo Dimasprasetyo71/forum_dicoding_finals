@@ -6,32 +6,32 @@ import '@testing-library/jest-dom';
 
 
 describe('<LeaderBoardItem />', () => {
-    const mockUser: User = {
-        id: 'user-1',
-        name: 'Jane Doe',
-        avatar: 'https://example.com/avatar.jpg',
-        email: ''
-    };
+  const mockUser: User = {
+    id: 'user-1',
+    name: 'Jane Doe',
+    avatar: 'https://example.com/avatar.jpg',
+    email: ''
+  };
 
-    it('renders the user avatar, name, and score', () => {
-        render(<LeaderBoardItem user={mockUser} score={42} />);
+  it('renders the user avatar, name, and score', () => {
+    render(<LeaderBoardItem user={mockUser} score={42} />);
 
-        // Avatar
-        const avatar = screen.getByAltText('Jane Doe') as HTMLImageElement;
-        expect(avatar).toBeInTheDocument();
-        expect(avatar.src).toBe('https://example.com/avatar.jpg');
+    // Avatar
+    const avatar = screen.getByAltText('Jane Doe') as HTMLImageElement;
+    expect(avatar).toBeInTheDocument();
+    expect(avatar.src).toBe('https://example.com/avatar.jpg');
 
-        // Name
-        expect(screen.getByText('Jane Doe')).toBeInTheDocument();
+    // Name
+    expect(screen.getByText('Jane Doe')).toBeInTheDocument();
 
-        // Score
-        expect(screen.getByText('42')).toBeInTheDocument();
-    });
+    // Score
+    expect(screen.getByText('42')).toBeInTheDocument();
+  });
 
-    it('has correct structure and classes', () => {
-        const { container } = render(<LeaderBoardItem user={mockUser} score={99} />);
+  it('has correct structure and classes', () => {
+    const { container } = render(<LeaderBoardItem user={mockUser} score={99} />);
 
-        const wrapper = container.firstChild as HTMLElement;
-        expect(wrapper).toHaveClass('flex', 'justify-between', 'items-center', 'py-3', 'border-b');
-    });
+    const wrapper = container.firstChild as HTMLElement;
+    expect(wrapper).toHaveClass('flex', 'justify-between', 'items-center', 'py-3', 'border-b');
+  });
 });

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { AppDispatch } from '../store';
 import { asyncSetAuthUser } from '../features/auth/action';
@@ -9,10 +10,19 @@ import LoginInput from '../components/auth/login/LoginInput';
 export default function SignIn() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
 
-  const onLogin = ({ email, password,  }: LoginPayload) => {
-    dispatch(asyncSetAuthUser({ email, password,  }));
-    navigate('/');
+  const onLogin = async ({ email, password }: LoginPayload) => {
+    setError(null);
+
+    try {
+      await dispatch(asyncSetAuthUser({ email, password }));
+      // Kalau sukses, redirect
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+      setError('Email atau password salah.');
+    }
   };
 
   return (
@@ -30,7 +40,7 @@ export default function SignIn() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="text-3xl font-bold text-gray-800"
           >
-                        Forum App
+            Forum App
           </motion.h1>
           <motion.div
             initial={{ opacity: 0 }}
@@ -39,6 +49,11 @@ export default function SignIn() {
             className="h-1 w-20 bg-indigo-600 mx-auto mt-2 rounded-full"
           ></motion.div>
         </div>
+
+        {/* Tampilkan error */}
+        {error && (
+          <div className="mb-4 text-red-600 text-center">{error}</div>
+        )}
 
         <LoginInput login={onLogin} />
 
@@ -49,7 +64,7 @@ export default function SignIn() {
           className="mt-8 text-center"
         >
           <p className="text-sm text-gray-500">
-                        &copy; {new Date().getFullYear()} Forum App. All rights reserved.
+            &copy; {new Date().getFullYear()} Forum App. All rights reserved.
           </p>
         </motion.div>
       </motion.div>

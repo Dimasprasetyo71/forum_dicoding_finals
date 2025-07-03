@@ -17,7 +17,7 @@ interface Leaderboard {
 
 interface RootState {
   leaderboards: Leaderboard[];
-  isLoading?: boolean; 
+  isLoading?: boolean;
 }
 
 const LeaderboardSkeleton = () => (

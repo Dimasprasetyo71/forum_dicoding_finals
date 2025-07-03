@@ -1,5 +1,5 @@
 export function FlagIcon({ code }: { code: string }) {
-  const src = `...`; // kode flag logic
+  const src = '...'; // kode flag logic
 
   return (
     <div className="relative">

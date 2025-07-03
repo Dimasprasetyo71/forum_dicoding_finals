@@ -2,7 +2,7 @@ import  { useContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import LocaleContext from './contexts/LocaleContext';
 import ThemeContext from './contexts/ThemeContext';
-import  {asyncPreloadProcess}  from './features/ispreload/action';
+import  { asyncPreloadProcess }  from './features/ispreload/action';
 import { asyncUnsetAuthUser } from './features/auth/action';
 import { useAppSelector, useAppDispatch } from '../src/store/hooks';
 

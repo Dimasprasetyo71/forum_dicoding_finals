@@ -18,8 +18,26 @@ export default function LoginInput({
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [rememberMe, setRememberMe] = useState(false);
 
+
+  
+  const [localError, setLocalError] = useState<string | null>(null);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!email.trim()) {
+      setLocalError('Email tidak boleh kosong.');
+      return;
+    }
+
+    if (!password.trim()) {
+      setLocalError('Password tidak boleh kosong.');
+      return;
+    }
+
+    // Kosongkan error kalau valid
+    setLocalError(null);
+
     login({ email, password, name: '' });
   };
 
@@ -239,7 +257,22 @@ export default function LoginInput({
                         Belum punya akun? <a href="/register" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">Daftar Sekarang</a>
           </p>
         </motion.div>
+        {localError && (
+          <motion.div
+            className="p-3 mb-5 text-sm font-medium text-red-600 bg-red-50 rounded-lg border border-red-100 flex items-center"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <svg className="w-5 h-5 mr-2 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            {localError}
+          </motion.div>
+        )}
       </form>
+
+
     </motion.div>
   );
 }
